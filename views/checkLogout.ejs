@@ -1,0 +1,16 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+    <%- include("partials/navbar.ejs") %> 
+    <div class="container">
+        <div class="card text-white bg-success mt-5">
+          <div class="card-header">Logout</div>
+          <div class="card-body">
+            <h5 class="card-title">Ao deslogar será necessário fazer o login novamente, tem certeza que quer deslogar?</h5>
+            <a class="btn btn-danger" href="/logout" target="_blank">Sim</a>
+            <a class="btn btn-warning" href="/">Não</a>
+          </div>
+    </div>
+</body>
+
+<%- include("partials/footer.ejs") %> 

@@ -1,0 +1,24 @@
+<%- include("partials/header.ejs") %>
+ 
+<body>
+    <%- include("partials/navbar.ejs") %>
+    <div id="calendar"></div>
+    
+</body>
+<script>
+    let element = document.getElementById("calendar");
+    let calendar = new FullCalendar.Calendar(element, {
+        initialView: "dayGridMonth",
+        locale: "pt-br",
+        events: "getCalendar",
+        eventClick: function(item){
+
+            window.location.href = "/event/" + item.event.id // isso vai redirecionar de page
+          
+        }
+    })
+
+    calendar.render();
+    
+</script>
+<%- include("partials/footer.ejs") %>

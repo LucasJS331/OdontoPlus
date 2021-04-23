@@ -1,0 +1,16 @@
+<%- include("partials/header.ejs") %>
+<body>
+  
+  <%- include("partials/navbar.ejs") %> 
+    <div class="container">
+        <div class="card text-white bg-success mt-5">
+          <div class="card-header">Tudo Pronto!</div>
+          <div class="card-body">
+            <h5 class="card-title">Seu cadastro foi realizado com sucesso!</h5>
+            <p>  <%= msg %>  </p>
+            <a class="btn btn-danger" href="/" target="_blank">Ir pra HomePage</a>
+            <a class="btn btn-primary" href="/cadastro" target="_blank">Realizar nova consulta</a>
+          </div>
+    </div>
+</body>
+<%- include("partials/footer.ejs") %> 

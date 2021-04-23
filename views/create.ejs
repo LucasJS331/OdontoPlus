@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <%- include("partials/navbar.ejs") %>
+    <div class="container mt-4 mb-4">
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Cadastrar consulta</h2>
+            </div>
+            
+            <div class="card-body">
+            <form action="/create" method="POST">
+                <label for="">Nome: </label>
+                <input type="text" name="name" id="name" placeholder="Nome do Cliente" class="form-control mb-3" required>
+
+                <label for="">Email: </label>
+                <input type="email" name="email" id="email" placeholder="example@hotmail.com" class="form-control mb-3" required>
+
+                <label for="" class="form-label">CPF: </label>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" class=" cpf form-control mb-3" required>
+
+                <label for="">Descrição: </label>
+                <input type="text" name="description" id="description" placeholder="description" class="form-control mb-3" required>
+
+                <label for="">Data: </label>
+                <input type="date" name="date" id="date" placeholder="00/00/00" class="form-control mb-3" required>
+
+                <label for="">Time: </label>
+                <input type="time" name="time" id="time" placeholder="00:00" class="form-control mb-3" required>
+
+                <button class="btn btn-danger btn-block mb-2">Cadastrar</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="jquery.mask.min.js"></script>
+<script>
+    $('.cpf').mask('000.000.000-00');
+</script>
+</html>
