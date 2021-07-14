@@ -9,9 +9,15 @@
     <style>
         body{
             background-color: #db12129d;
-            padding-top: 70px;
-            padding-left: 250px;
-            padding-right: 250px;
+            margin-top: 120px;
+        }
+
+        h2{
+            color:#ce1616d5;
+        }
+
+        label{
+            color:#ce1616d5;
         }
     </style>
 </head>
@@ -26,17 +32,15 @@
             <div class="card-body">
                 <form action="/auth" method="post">
                     <label>Email: </label>
-                    <input type="text" placeholder="Example@hotmail.com" class="form-control" name="email" required><br>
-
+                    <input type="text" placeholder="Example@hotmail.com" class="form-control" name="email" required value="<%=email %>"><br>
+                    <label for=""><%= emailError %>  </label>
                     <label>Senha: </label>
-                    <input type="password" placeholder="*****" class="form-control" name="password" required><br>
 
-
-                    <button class="btn btn-danger mb-2 mt-3">Logar</button><br>
-
-                    <% if (login.err == true) { %>
-                        <small style="color: red;"> <%= login.msg %>  </small>
-                    <% } %>
+                    <input type="password" placeholder="*****" class="form-control" name="password" required value="<%=wrongPassword %>"><br>
+                    <label for=""><%= passwordError %>  </label>
+                    
+                    <button class="btn btn-danger" type="submit">Logar</button>
+                    <label for=""><%= msgError %></label>
                      
                 </form>
             </div>
