@@ -3,10 +3,12 @@ const validator = require("validator");
 
 class AppointmentController{
     index(req,res){
+        res.locals.title = "Bem vindo - OdontoPlus";
         res.render("index");
     }
 
     createAppoPage(req,res){
+        res.locals.title = "Criar consulta";
         res.render("create");
     }
 
@@ -75,8 +77,10 @@ class AppointmentController{
     }
 
     async Event(req,res){
+        res.locals.title = "Consulta";
         let id = req.params.id;
 
+        console.log(id);
         let result = await AppointmentService.getById(id);
    
        if(result != undefined){
@@ -113,6 +117,7 @@ class AppointmentController{
         
         let result = await AppointmentService.getAll(true);
 
+        res.locals.title = "Consultas";
         res.render("list", {appos: result});
     }
 

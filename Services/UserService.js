@@ -11,14 +11,8 @@ class UserService {
             let salt = 10;
 
             let hash = await bcrypt.hashSync(password, salt);
-
-            let user = await this.VerifyUserExistByEmail(email);
-
-
-            if(!user){
-                // se o email não existir no banco: 
-
-                let newUser = new userModel({
+       
+             let newUser = new userModel({
                     name,
                     email,
                     password: hash
@@ -31,20 +25,16 @@ class UserService {
                 }
 
                 return result;
-            } else{
-                // se o email ja estiver cadastrado no banco: 
-
-                let result = {
-                    status: false,
-                    err: "Email ja cadastrado"
-                }
-
-                return result;
-            }
+           
     
         } catch (error) {
             console.log(error);
-            return false;
+            let result = {
+                status: false
+            }
+
+            return result;
+       
             
         }
     }
@@ -79,7 +69,7 @@ class UserService {
         } 
         catch(err){
             console.log(err);
-            return false;
+            return undefined;
         }
     }
 

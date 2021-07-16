@@ -30,7 +30,7 @@ app.use("/", AppointmentRouter);
 
 // db connection
 
-mongoose.connect("mongodb://localhost:27017/agendamento", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 
@@ -38,5 +38,4 @@ app.listen(port, ()=>{
     console.log("app está rodando na porta " + port);
 })
 
-//todoo: BOA PRATICA MAN, BOAS PRATICAS, Faça a partial do menu kkkk
-//todoo: tambem faz o esquema de logout e teste todo o sistema
+//todoo:codei o dia inteiro kkkjsm, aqui faltou configurar o .env, finalizar o front-end, e da mais um chek no envio de emaisl/configurar o transporter
