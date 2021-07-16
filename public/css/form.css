@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+label{
+    display: block;
+    margin: 10px 0 0 0;
+}
+.form-section{
+    width: 40%;
+    margin: 20px auto;
+    padding: 1em;
+
+}
+.form-control{
+    margin-bottom: 0;
+}
+.eye{
+    color: tomato;
+    margin-left: 3px;
+}
+.form-control{
+    margin-bottom: 0;
+}
+
+.form-label-error{
+    color: rgb(192, 32, 32);
+    margin: 0;
+}
+
+.form-label-password{
+    display: inline-block;
+}
+
+@media screen and (max-width: 650px) {  
+
+    .form-section{
+        width: 100%;
+        margin: 0px auto;
+    }
+    .btn{
+     width: 100%;
+    }
+
+
+    
+   
+    
+}

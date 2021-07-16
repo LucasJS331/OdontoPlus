@@ -1,7 +1,7 @@
 <%- include("partials/header.ejs") %>
 <body>
     <%- include("partials/navbar.ejs") %>
-    <div class="container mt-4 mb-4">
+    <section class="form-section">
 
         <div class="card">
             <div class="card-header">
@@ -11,27 +11,34 @@
             <div class="card-body">
             <form action="/create" method="POST">
                 <label for="">Nome: </label>
-                <input type="text" name="name" id="name" placeholder="Nome do Cliente" class="form-control mb-3" required>
+                <input type="text" name="name" id="name" placeholder="Nome do Cliente" class="form-control" value="<%=nameValue%>">
+                <label  class="form-label-error"><%= nameError %></label>
 
                 <label for="">Email: </label>
-                <input type="email" name="email" id="email" placeholder="example@hotmail.com" class="form-control mb-3" required>
+                <input type="email" name="email" id="email" placeholder="example@hotmail.com" class="form-control"  value="<%=emailValue%>" >
+                <label  class="form-label-error"><%= emailError %></label>
+                <label  class="form-label-error"><%= emailExist %> </label>
 
                 <label for="" class="form-label">CPF: </label>
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" class=" cpf form-control mb-3" required>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" class=" cpf form-control " value="<%=cpfValue%>">
+                <label class="form-label-error" ><%= cpfError %></label>
 
                 <label for="">Descrição: </label>
-                <input type="text" name="description" id="description" placeholder="description" class="form-control mb-3" required>
+                <input type="text" name="description" id="description" placeholder="description" class="form-control"  value="<%=descriptionValue%>">
+                <label class="form-label-error"><%= descriptionError %></label>
 
                 <label for="">Data: </label>
-                <input type="date" name="date" id="date" placeholder="00/00/00" class="form-control mb-3" required>
+                <input type="date" name="date" id="date" placeholder="00/00/00" class="form-control"  value="<%=dateValue%>">
+                <label  class="form-label-error"><%= dateError %></label>
 
                 <label for="">Time: </label>
-                <input type="time" name="time" id="time" placeholder="00:00" class="form-control mb-3" required>
+                <input type="time" name="time" id="time" placeholder="00:00" class="form-control" value="<%=timeValue%>">
+                <label  class="form-label-error"><%= timeError %></label>
 
-                <button class="btn btn-danger btn-block mb-2">Cadastrar</button>
+                <button class="btn btn-danger btn-block mt-3">Cadastrar</button>
             </form>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 <%- include("partials/footer.ejs") %> 

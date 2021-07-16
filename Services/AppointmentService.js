@@ -33,8 +33,8 @@ class AppointmentService{
 
     async VerifyExistByEmail(email){
         try {
-         let user =  await Appo.findOne({email: email});
-         if(user != undefined){
+         let appo =  await Appo.findOne({email: email});
+         if(appo != undefined){
              let result = {
                  status: true
              }
@@ -51,7 +51,7 @@ class AppointmentService{
             console.log(error);
             
             let result = {
-                status: false
+                status: undefined
             }
 
             return result;
@@ -138,11 +138,11 @@ class AppointmentService{
 
             if(appos != undefined){
                 const transporter = nodemailer.createTransport({
-                    host: 'smtp.ethereal.email',
+                    host: process.env.HOST,
                     port: 587,
                     auth: {
-                        user: 'elna.conn44@ethereal.email',
-                        pass: 'AzQpEjupk5tRaMewqU'
+                        user: process.env.USER_EMAIL,
+                        pass: process.env.USER_PASS_KEY
                     }
                 });
     
@@ -161,7 +161,6 @@ class AppointmentService{
                                 from: "Lucas <lucas.galvao@gmail.com>",
                                 to: newAppo.userEmail,
                                 subject: newAppo.subject,
-                                text: "Sua consulta é daqui a pouco ;)",
                                 html: newAppo.html
                             })
                         }

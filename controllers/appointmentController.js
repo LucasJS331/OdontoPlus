@@ -8,66 +8,184 @@ class AppointmentController{
     }
 
     createAppoPage(req,res){
-        res.locals.title = "Criar consulta";
-        res.render("create");
+        let nameError = req.flash("nameError");
+        let nameValue = req.flash("nameValue");
+        let descriptionError = req.flash("descriptionError");
+        let descriptionValue = req.flash("descriptionValue");
+        let emailError = req.flash("emailError");
+        let emailExist = req.flash("emailExist");
+        let emailValue = req.flash("emailValue");
+        let cpfError = req.flash("cpfError");
+        let cpfValue = req.flash("cpfValue");
+        let timeError = req.flash("timeError");
+        let timeValue = req.flash("timeValue");
+        let dateError = req.flash("dateError");
+        let dateValue = req.flash("dateValue");
+
+
+        if(nameError == undefined || nameError.length == 0){
+            nameError = "";
+        }
+
+        
+        if(nameValue == undefined || nameValue.length == 0){
+            nameValue = "";
+        }
+
+        if(descriptionError == undefined || descriptionError.length == 0){
+            descriptionError = "";
+        }
+
+        if(descriptionValue == undefined || descriptionValue.length == 0){
+            descriptionValue = "";
+        }
+
+        if(emailError == undefined || emailError.length == 0){
+            emailError = "";
+        }
+
+        if(emailExist == undefined || emailExist.length == 0){
+            emailExist = "";
+        }
+
+        if(emailValue == undefined || emailValue.length == 0){
+            emailValue = "";
+        }
+
+        if(cpfError == undefined || cpfError.length == 0){
+            cpfError = "";
+        }
+
+        
+        if(cpfValue == undefined || cpfValue.length == 0){
+            cpfValue = "";
+        }
+
+        if(timeError == undefined || timeError.length == 0){
+            timeError = "";
+        }
+
+        
+        if(timeValue == undefined || timeValue.length == 0){
+            timeValue = "";
+        }
+
+        if(dateError == undefined || dateError.length == 0){
+            dateError = "";
+        }
+
+        
+        if(dateValue == undefined || dateValue.length == 0){
+            dateValue = "";
+        }
+        res.locals.title = "Criar consulta";     
+        res.render("create", {
+             nameError,
+             nameValue,
+             descriptionValue,
+             descriptionError,
+             emailValue,
+             emailError,
+             emailExist,
+             cpfError,
+             cpfValue,
+             timeError,
+             timeValue,
+             dateValue,
+             dateError
+            });
+
+        
+       
     }
 
    async createAppo(req,res){
         let {name,email,description,cpf,date,time } = req.body;
 
-        if(name == undefined || ""){
-            res.redirect("/cadastro");
-            return;
+        let nameError;
+        let emailError;
+        let descriptionError;
+        let cpfError;
+        let dateError;
+        let timeError;
+        let emailExist;
+
+    
+        if(description == undefined || description.trim() == ""){
+            descriptionError = "descrição invalida!";
+        
+        }
+
+        if(name == undefined || name.trim()== ""){
+            nameError = "nome invalido!"
+        }
+
+        if(cpf == undefined || cpf.trim() == "" || cpf.length < 14){
+            cpfError = "cpf invalido!";
+        
+        }
+
+        if(date == undefined || date.trim() == ""){
+            dateError = "data invalida";
+        }
+
+        if(time == undefined || time.trim() == ""){
+            timeError = "tempo invalido";
         }
 
         if(!validator.isEmail(email)){
+            
+            emailError = "email é invalido!";
+          
+        } else{
+            
+            try {
+                let result = await AppointmentService.VerifyExistByEmail(email);
+
+                if(result.status){
+                    emailExist = "esse email já está cadastrado!";
+                }
+  
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        if(emailError != undefined || descriptionError != undefined || nameError != undefined || emailExist != undefined || cpfError != undefined || dateError != undefined || timeError != undefined){
+            req.flash("nameError", nameError);
+            req.flash("nameValue", name);
+            req.flash("emailError", emailError);
+            req.flash("emailValue", email);
+            req.flash("emailExist", emailExist);
+            req.flash("descriptionError", descriptionError);
+            req.flash("descriptionValue", description);
+            req.flash("cpfError", cpfError);
+            req.flash("cpfValue", cpf);
+            req.flash("dateError", dateError);
+            req.flash("dateValue", date);
+            req.flash("timeError", timeError);
+            req.flash("timeValue", time);
             res.redirect("/cadastro");
             return;
         }
-
-        if(description == undefined || ""){
-            res.redirect("/cadastro");
-            return;
-        }
-
-        if(cpf == undefined || ""){
-            res.redirect("/cadastro");
-            return;
-        }
-
-        if(date == undefined || ""){
-            res.redirect("/cadastro");
-            return;
-        }
-
-        if(time == undefined || ""){
-            res.redirect("/cadastro");
-            return;
-        }
-
-        let verify = await AppointmentService.VerifyExistByEmail(email);
-
-        if(!verify.status){
 
             try {
                 let result = await AppointmentService.Create(name,email,description,cpf, date,time);
 
                 if(result){
-                    res.render("success", {msg: "consulta realizada com sucesso, consulte a home para ver mais detalhes!"});
+                    res.locals.title = "Sucesso!"
+                    res.render("success");
                     return;
                 }
                 else{
-                    res.redirect("/cadastro");
+                    res.redirect("/");
                     return;
                 }
             } catch (error) {
                 console.log(error);
-                res.redirect("/cadastro");
+                res.redirect("/login");
             }
-
-        }else{
-            res.redirect("/cadastro");
-        }
+        
     }
 
     async getCalendar(req,res){
@@ -80,7 +198,9 @@ class AppointmentController{
         res.locals.title = "Consulta";
         let id = req.params.id;
 
-        console.log(id);
+        if(!validator.isMongoId(id)){
+            return;
+        }
         let result = await AppointmentService.getById(id);
    
        if(result != undefined){

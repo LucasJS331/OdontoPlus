@@ -1,7 +1,7 @@
 <%- include("partials/header.ejs") %>
-<body>
+<body id="login">
 
-    <div class="container mt-5">
+    <section id="login-section">
         <div class="card">
             <div class="card-header">
                 <h2>Login</h2>
@@ -9,21 +9,22 @@
             
             <div class="card-body">
                 <form action="/auth" method="post">
-                    <label class="form-text-label">Email: </label>
+                    <label>Email </label>
                     <input type="text" placeholder="Example@hotmail.com" class="form-control" name="email" required value="<%=email %>" autofocus>
                     <label class="form-label-error"><%= emailError %>  </label>
                     
-                    <label class="form-text-label">Senha: </label>
+                    <label class="form-label-password">Senha </label>
+                    <i class="fas fa-eye eye" id="olho"></i>
                     <input type="password" placeholder="*****" class="form-control" name="password" required value="<%=wrongPassword %>">
                     <label  class="form-label-error"><%= passwordError %></label>
                     
                     <label class="form-label-error"><%= msgError %></label>
-                    <button class="btn btn-danger" type="submit">Logar</button>
+                    <button class="btn btn-danger mt-3" type="submit">Logar</button>
                      
                 </form>
             </div>
         </div>
-    </div>
+    </section>
     
 </body>
 <%- include("partials/footer.ejs") %> 

@@ -92,7 +92,7 @@ class UserController {
     userPage(req,res){
         res.locals.title = "cadastro";
 
-        let nameError = req.flash("nomeError");
+        let nameError = req.flash("nameError");
         let nameValue = req.flash("nameValue");
         let passwordError = req.flash("passwordError");
         let passwordValue = req.flash("passwordValue");
@@ -149,12 +149,12 @@ class UserController {
         let passwordError;
         let emailExist;
     
-        if(password == undefined || password == " "){
+        if(password == undefined || password.trim() == "" || password.length < 6){
             passwordError = "senha invalida!";
         
         }
 
-        if(name == undefined || name == " "){
+        if(name == undefined || name.trim() == ""){
             nameError = "nome invalido!"
         }
 
@@ -194,6 +194,7 @@ class UserController {
             
             if(result.status)
             {
+                res.locals.title = "Sucesso!";
                 res.render("success");
                 return;
             }
