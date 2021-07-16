@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 mongoose.set('useFindAndModify', false);
 app.use(session({
-    secret: "ajdjenf",
+    secret: process.env.SECRET,
     cookie: {maxAge: 172800000, secure: false},
     resave: false,
     saveUninitialized: true
@@ -38,4 +38,3 @@ app.listen(port, ()=>{
     console.log("app está rodando na porta " + port);
 })
 
-//todoo:codei o dia inteiro kkkjsm, aqui faltou configurar o .env, finalizar o front-end, e da mais um chek no envio de emaisl/configurar o transporter
